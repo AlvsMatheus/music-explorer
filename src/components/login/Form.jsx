@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Form = () => {
+const Form = ({onLoginSuccess}) => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -22,6 +22,9 @@ const Form = () => {
       return;
     }
     localStorage.setItem("isLoggedIn", "true");
+    if (onLoginSuccess) {
+      onLoginSuccess();
+    }
     navigate("/explorer");
   };
 
