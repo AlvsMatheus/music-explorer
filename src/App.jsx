@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Explorer from "./pages/Explorer"
@@ -5,7 +6,15 @@ import Detail from "./pages/Details"
 import { MusicProvider } from "./context/MusicContext"
 
 function App() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+
+  useEffect(() => {
+    const checkLogin = () => {
+      setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+    };
+    window.addEventListener('storage', checkLogin);
+    return () => window.removeEventListener('storage', checkLogin);
+  }, []);
 
   return (
     <MusicProvider>
