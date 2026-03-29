@@ -13,14 +13,6 @@ const Form = ({onLoginSuccess}) => {
       setError("Phone number is required");
       return;
     }
-    if (!phone.startsWith("+254")) {
-      setError("Phone must start with +254");
-      return;
-    }
-    if (phone !== "+254712345678") {
-      setError("Invalid phone number");
-      return;
-    }
     localStorage.setItem("isLoggedIn", "true");
     if (onLoginSuccess) {
       onLoginSuccess();
@@ -44,7 +36,7 @@ const Form = ({onLoginSuccess}) => {
             setError("");
           }}
           value={phone}
-          placeholder="+254712345678"
+          placeholder="a number is required"
           className="h-12 w-full px-2 rounded-xl bg-white/20 text-white outline-none focus:border-white/40 transition"
           type="tel"
         />
